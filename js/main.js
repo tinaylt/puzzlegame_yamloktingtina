@@ -10,6 +10,7 @@ let theButtons = document.querySelectorAll("#buttonHolder img"),
 
     function changeBGImage() {
         puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)` 
+        puzzlePieces.forEach(piece => {dragZone.appendChild(piece);}); 
     }
 
     function handleStartDrag() { 
@@ -23,9 +24,20 @@ let theButtons = document.querySelectorAll("#buttonHolder img"),
     }
 
     function handleDrop(event) {
-        event.preventDefault();
-		console.log('dropped on the Zone!!');
-        this.appendChild(draggedPiece);
+        if (this.firstElementChild === null) {
+            event.preventDefault();
+            console.log('dropped on the Zone!!');
+            this.appendChild(draggedPiece);
+            }
+        
+            else {
+                return draggedPiece;
+            };
+    }
+
+    function resetPuzzle() {
+        puzzleBoard.style.backgroundImage = '';
+        puzzlePieces.forEach(piece => {dragZone.appendChild(piece)});
     }
 
     theButtons.forEach(button => button.addEventListener("click", changeBGImage));
@@ -36,3 +48,6 @@ let theButtons = document.querySelectorAll("#buttonHolder img"),
     dropZones.forEach(zone => zone.addEventListener("dragover", handleDragOver));
     
     dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
+
+    resetButton.addEventListener("click", resetPuzzle);
+
