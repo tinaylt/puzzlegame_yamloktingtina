@@ -50,3 +50,4 @@ let theButtons = document.querySelectorAll("#buttonHolder img"),
     dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
 
     resetButton.addEventListener("click", resetPuzzle);
+
